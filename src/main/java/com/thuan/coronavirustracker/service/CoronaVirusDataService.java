@@ -32,7 +32,7 @@ public class CoronaVirusDataService {
         HttpResponse<String> httpResponse = httpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());
 
         StringReader csvBodyReader = new StringReader(httpResponse.body());
-        Iterable<CSVRecord> records = CSVFormat.DEFAULT.parse(csvBodyReader);
+        Iterable<CSVRecord> records = CSVFormat.DEFAULT.withFirstRecordAsHeader().parse(csvBodyReader);
         for (CSVRecord record : records) {
             String province = record.get(0);
             String country = record.get(1);
@@ -40,5 +40,13 @@ public class CoronaVirusDataService {
             newStats.add(new LocationStats(province, country, latestCases));
         }
         this.allStats = newStats;
+    }
+
+    public List<LocationStats> getAllStats() {
+        return allStats;
+    }
+
+    public void setAllStats(List<LocationStats> allStats) {
+        this.allStats = allStats;
     }
 }
