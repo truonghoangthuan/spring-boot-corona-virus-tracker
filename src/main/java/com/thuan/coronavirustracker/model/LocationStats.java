@@ -3,12 +3,14 @@ package com.thuan.coronavirustracker.model;
 public class LocationStats {
     private String province;
     private String country;
-    private String latestTotalCases;
+    private int latestTotalCases;
+    private int previousTotalCases;
 
-    public LocationStats(String province, String country, String latestTotalCases) {
+    public LocationStats(String province, String country, int latestTotalCases, int previousTotalCases) {
         this.province = province;
         this.country = country;
         this.latestTotalCases = latestTotalCases;
+        this.previousTotalCases = previousTotalCases;
     }
 
     @Override
@@ -16,8 +18,17 @@ public class LocationStats {
         return "LocationStats{" +
                 "province='" + province + '\'' +
                 ", country='" + country + '\'' +
-                ", latestTotalCases='" + latestTotalCases + '\'' +
+                ", latestTotalCases=" + latestTotalCases +
+                ", previousTotalCases=" + previousTotalCases +
                 '}';
+    }
+
+    public int getPreviousTotalCases() {
+        return previousTotalCases;
+    }
+
+    public void setPreviousTotalCases(int previousTotalCases) {
+        this.previousTotalCases = previousTotalCases;
     }
 
     public String getProvince() {
@@ -36,11 +47,11 @@ public class LocationStats {
         this.country = country;
     }
 
-    public String getLatestTotalCases() {
+    public int getLatestTotalCases() {
         return latestTotalCases;
     }
 
-    public void setLatestTotalCases(String latestTotalCases) {
+    public void setLatestTotalCases(int latestTotalCases) {
         this.latestTotalCases = latestTotalCases;
     }
 }

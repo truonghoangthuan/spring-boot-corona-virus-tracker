@@ -36,8 +36,9 @@ public class CoronaVirusDataService {
         for (CSVRecord record : records) {
             String province = record.get(0);
             String country = record.get(1);
-            String latestCases = record.get(record.size() - 1);
-            newStats.add(new LocationStats(province, country, latestCases));
+            int latestCases = Integer.parseInt(record.get(record.size() - 1));
+            int previousTotalCases = latestCases - Integer.parseInt(record.get(record.size() - 2));
+            newStats.add(new LocationStats(province, country, latestCases, previousTotalCases));
         }
         this.allStats = newStats;
     }
